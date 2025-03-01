@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { styled } from 'nativewind';
 import { PropertyType } from '../types';
 import { useFilterStore } from '../state/filterStore';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // Apply styled to React Native components
 const StyledView = styled(View);
@@ -56,7 +57,7 @@ export const FilterBar: React.FC = () => {
         <StyledView className="flex-row space-x-2">
           <StyledTouchableOpacity
             className={isAllSelected 
-              ? "px-4 py-2 rounded-full bg-primary-700" 
+              ? "px-4 py-2 rounded-full bg-primary-600" 
               : "px-4 py-2 rounded-full bg-dark-500"}
             onPress={handleAllFilter}
             activeOpacity={0.7}
@@ -77,7 +78,7 @@ export const FilterBar: React.FC = () => {
           
           <StyledTouchableOpacity
             className={isHdbSelected 
-              ? "px-4 py-2 rounded-full bg-primary-700" 
+              ? "px-4 py-2 rounded-full bg-primary-600" 
               : "px-4 py-2 rounded-full bg-dark-500"}
             onPress={handleHdbFilter}
             activeOpacity={0.7}
@@ -98,7 +99,7 @@ export const FilterBar: React.FC = () => {
           
           <StyledTouchableOpacity
             className={isPrivateSelected 
-              ? "px-4 py-2 rounded-full bg-primary-700" 
+              ? "px-4 py-2 rounded-full bg-primary-600" 
               : "px-4 py-2 rounded-full bg-dark-500"}
             onPress={handlePrivateFilter}
             activeOpacity={0.7}
@@ -119,7 +120,7 @@ export const FilterBar: React.FC = () => {
         </StyledView>
         
         <StyledTouchableOpacity
-          className="px-4 py-2 rounded-full bg-secondary-800 flex-row items-center"
+          className="px-4 py-2 rounded-full bg-primary-700 flex-row items-center"
           onPress={toggleFilterModal}
           activeOpacity={0.7}
           style={{
@@ -130,8 +131,8 @@ export const FilterBar: React.FC = () => {
             elevation: 2
           }}
         >
-          <StyledText className="text-sm font-medium text-secondary-300 mr-1">Filters</StyledText>
-          <StyledText>🔍</StyledText>
+          <StyledText className="text-sm font-medium text-white mr-1">Filters</StyledText>
+          <MaterialIcons name="filter-list" size={16} color="white" />
         </StyledTouchableOpacity>
       </StyledView>
       
@@ -156,10 +157,11 @@ export const FilterBar: React.FC = () => {
               <StyledText className="text-xl font-bold text-center mb-1 text-gray-200">Property Filters</StyledText>
               <StyledTouchableOpacity
                 onPress={() => resetFilters()}
-                className="absolute right-0 top-0"
+                className="absolute right-0 top-0 flex-row items-center"
                 activeOpacity={0.7}
               >
-                <StyledText className="text-primary-400 font-medium">Reset</StyledText>
+                <StyledText className="text-primary-400 font-medium mr-1">Reset</StyledText>
+                <MaterialIcons name="refresh" size={16} color="#38BDF8" />
               </StyledTouchableOpacity>
             </StyledView>
             
@@ -194,8 +196,9 @@ export const FilterBar: React.FC = () => {
                 </StyledView>
               </StyledView>
               
-              <StyledView className="mt-4 bg-primary-900 p-3 rounded-lg">
-                <StyledText className="text-sm text-primary-300 font-medium">
+              <StyledView className="mt-4 bg-primary-800 p-3 rounded-lg flex-row items-center">
+                <MaterialIcons name="info-outline" size={16} color="#7DD3FC" style={{ marginRight: 6 }} />
+                <StyledText className="text-sm text-primary-200 font-medium">
                   Current range: S${filter.priceRange[0]} - S${filter.priceRange[1]}
                 </StyledText>
               </StyledView>
@@ -203,15 +206,16 @@ export const FilterBar: React.FC = () => {
             
             <StyledView className="flex-row space-x-3 pt-4">
               <StyledTouchableOpacity
-                className="flex-1 py-3 rounded-xl bg-dark-500"
+                className="flex-1 py-3 rounded-xl bg-dark-500 flex-row justify-center items-center"
                 onPress={toggleFilterModal}
                 activeOpacity={0.7}
               >
+                <MaterialIcons name="close" size={18} color="#94A3B8" style={{ marginRight: 5 }} />
                 <StyledText className="text-center font-semibold text-gray-300">Cancel</StyledText>
               </StyledTouchableOpacity>
               
               <StyledTouchableOpacity
-                className="flex-1 py-3 rounded-xl bg-primary-700 shadow-sm"
+                className="flex-1 py-3 rounded-xl bg-primary-600 shadow-sm flex-row justify-center items-center"
                 onPress={applyFilters}
                 activeOpacity={0.7}
                 style={{
@@ -222,6 +226,7 @@ export const FilterBar: React.FC = () => {
                   elevation: 3
                 }}
               >
+                <MaterialIcons name="check" size={18} color="white" style={{ marginRight: 5 }} />
                 <StyledText className="text-center font-semibold text-white">Apply Filters</StyledText>
               </StyledTouchableOpacity>
             </StyledView>

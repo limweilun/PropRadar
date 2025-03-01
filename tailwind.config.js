@@ -9,54 +9,54 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#6D28D9',
-          50: '#F5F3FF',
-          100: '#EDE9FE',
-          200: '#DDD6FE',
-          300: '#C4B5FD',
-          400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#7C3AED',
-          700: '#6D28D9',
-          800: '#5B21B6',
-          900: '#4C1D95',
+          DEFAULT: '#0EA5E9', // Modern blue
+          50: '#F0F9FF',
+          100: '#E0F2FE',
+          200: '#BAE6FD',
+          300: '#7DD3FC',
+          400: '#38BDF8',
+          500: '#0EA5E9',
+          600: '#0284C7',
+          700: '#0369A1',
+          800: '#075985',
+          900: '#0C4A6E',
         },
         secondary: {
-          DEFAULT: '#06B6D4',
-          50: '#ECFEFF',
-          100: '#CFFAFE',
-          200: '#A5F3FC',
-          300: '#67E8F9',
-          400: '#22D3EE',
-          500: '#06B6D4',
-          600: '#0891B2',
-          700: '#0E7490',
-          800: '#155E75',
-          900: '#164E63',
+          DEFAULT: '#3B82F6', // Blue
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6',
+          600: '#2563EB',
+          700: '#1D4ED8',
+          800: '#1E40AF',
+          900: '#1E3A8A',
         },
         undervalued: '#10B981', // green
-        fairvalue: '#FBBF24', // yellow
+        fairvalue: '#F59E0B', // amber
         overvalued: '#EF4444', // red
-        background: '#121212',
-        surface: '#1E1E1E',
-        card: '#242424',
-        text: '#E5E7EB',
-        lightText: '#9CA3AF',
+        background: '#0F172A', // Deep navy
+        surface: '#1E293B', // Slate dark
+        card: '#1E293B', // Slate dark
+        text: '#E2E8F0', // Light gray
+        lightText: '#94A3B8', // Slate gray
         accent: {
-          DEFAULT: '#06B6D4',
-          light: '#0E7490',
+          DEFAULT: '#38BDF8', // Light blue
+          light: '#0EA5E9', // Blue
         },
         dark: {
-          900: '#121212', // Background
-          800: '#1E1E1E', // Surface
-          700: '#242424', // Card
-          600: '#2C2C2C', // Input
-          500: '#323232', // Elevated components
-          400: '#383838', // Higher elevated components
-          300: '#424242', // Highest elements
-          200: '#6E6E6E', // Disabled state
-          100: '#757575', // Low emphasis text
-          50: '#8F8F8F',  // Medium emphasis text
+          900: '#0F172A', // Deep navy (background)
+          800: '#1E293B', // Slate dark (surface)
+          700: '#334155', // Slate (card, borders)
+          600: '#475569', // Slate (inputs)
+          500: '#64748B', // Slate (elevated components)
+          400: '#94A3B8', // Slate (higher elements, inactive icons)
+          300: '#CBD5E1', // Slate (highest elements)
+          200: '#E2E8F0', // Slate (text)
+          100: '#F1F5F9', // Slate (high emphasis text)
+          50: '#F8FAFC',  // Slate (bright text)
         },
         gray: {
           50: '#F9FAFB',

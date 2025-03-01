@@ -67,6 +67,17 @@ export const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property, onCl
     );
   };
 
+  // Get confidence badge color
+  const getConfidenceBadgeColor = () => {
+    switch(property.valuationConfidence) {
+      case 'Very High': return 'bg-green-800 text-green-100';
+      case 'High': return 'bg-green-700 text-green-100';
+      case 'Medium': return 'bg-yellow-600 text-yellow-100';
+      case 'Low': return 'bg-red-600 text-red-100';
+      default: return 'bg-dark-500 text-gray-300';
+    }
+  };
+
   return (
     <StyledView className="bg-dark-700 rounded-t-xl shadow-xl p-6 pt-3">
       <StyledView className="w-16 h-1 bg-dark-400 rounded-full mx-auto mb-5" />
@@ -138,17 +149,64 @@ export const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property, onCl
         </StyledView>
         
         <StyledView className="mb-6 p-5 border border-dark-500 rounded-xl bg-dark-600">
-          <StyledText className="text-lg font-bold mb-2 text-gray-200">Valuation Analysis</StyledText>
+          <StyledView className="flex-row justify-between items-center mb-2">
+            <StyledText className="text-lg font-bold text-gray-200">Valuation Analysis</StyledText>
+            {property.valuationConfidence && (
+              <StyledView className={`px-3 py-1 rounded-full ${getConfidenceBadgeColor()}`}>
+                <StyledText className="text-xs font-semibold">{property.valuationConfidence} Confidence</StyledText>
+              </StyledView>
+            )}
+          </StyledView>
           <StyledText className={`text-2xl font-bold mb-3 ${getScoreColor()}`}>
             {getTrendIndicator()}{getUndervaluationText(property.undervaluationScore)}
           </StyledText>
           <StyledText className="text-sm leading-5 text-gray-300 bg-dark-500 p-3 rounded-lg">
             {property.undervaluationScore > 0
-              ? `This property is priced ${property.undervaluationScore}% below similar properties in the area, suggesting it might be undervalued.`
+              ? `This property is priced ${property.undervaluationScore.toFixed(1)}% below similar properties in the area, suggesting it might be undervalued.`
               : property.undervaluationScore < 0
-              ? `This property is priced ${Math.abs(property.undervaluationScore)}% above similar properties in the area, suggesting it might be overvalued.`
+              ? `This property is priced ${Math.abs(property.undervaluationScore).toFixed(1)}% above similar properties in the area, suggesting it might be overvalued.`
               : 'This property is priced at market value compared to similar properties in the area.'}
           </StyledText>
+          
+          {property.additionalDetails && (
+            <StyledView className="mt-4 pt-3 border-t border-dark-400">
+              {property.additionalDetails.floorCategory && (
+                <StyledView className="flex-row items-center mb-2">
+                  <StyledView className="w-2 h-2 rounded-full bg-dark-300 mr-2" />
+                  <StyledText className="text-xs text-gray-300">
+                    {property.additionalDetails.floorCategory} ({property.additionalDetails.floorLevel || '?'} floor)
+                  </StyledText>
+                </StyledView>
+              )}
+              
+              {property.additionalDetails.remainingLease !== undefined && (
+                <StyledView className="flex-row items-center mb-2">
+                  <StyledView className="w-2 h-2 rounded-full bg-dark-300 mr-2" />
+                  <StyledText className="text-xs text-gray-300">
+                    Approx. {property.additionalDetails.remainingLease} years lease remaining
+                  </StyledText>
+                </StyledView>
+              )}
+              
+              {property.additionalDetails.mrtProximity !== undefined && (
+                <StyledView className="flex-row items-center mb-2">
+                  <StyledView className="w-2 h-2 rounded-full bg-dark-300 mr-2" />
+                  <StyledText className="text-xs text-gray-300">
+                    MRT accessibility: {property.additionalDetails.mrtProximity}/10
+                  </StyledText>
+                </StyledView>
+              )}
+              
+              {property.additionalDetails.comparableCount !== undefined && (
+                <StyledView className="flex-row items-center mb-2">
+                  <StyledView className="w-2 h-2 rounded-full bg-dark-300 mr-2" />
+                  <StyledText className="text-xs text-gray-300">
+                    Based on {property.additionalDetails.comparableCount} comparable properties
+                  </StyledText>
+                </StyledView>
+              )}
+            </StyledView>
+          )}
         </StyledView>
         
         <StyledView className="mb-5">

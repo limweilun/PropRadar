@@ -18,11 +18,20 @@ export type Property = {
   type: PropertyType;
   roomType: string;
   undervaluationScore: number; // Positive means undervalued, negative means overvalued
+  valuationConfidence?: 'Low' | 'Medium' | 'High' | 'Very High'; // Confidence in the valuation
   coordinates: {
     latitude: number;
     longitude: number;
   };
   priceHistory: PricePoint[];
+  additionalDetails?: {
+    floorLevel?: number;
+    floorCategory?: string;
+    remainingLease?: number;
+    mrtProximity?: number;
+    comparableCount?: number; // Number of similar properties used for comparison
+    medianAreaPrice?: number; // Median price per sqft for similar properties
+  };
 };
 
 // Map marker types
@@ -42,7 +51,7 @@ export type PropertyFilter = {
 // Watchlist types
 export type WatchlistItem = {
   property: Property;
-  addedAt: Date;
+  addedAt: Date | string;
   alerts: WatchlistAlert[];
 };
 
@@ -50,6 +59,6 @@ export type WatchlistAlert = {
   id: string;
   type: 'PRICE_DROP' | 'UNDERVALUATION_CHANGE';
   message: string;
-  createdAt: Date;
+  createdAt: Date | string;
   read: boolean;
 };

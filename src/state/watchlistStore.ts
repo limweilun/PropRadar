@@ -11,6 +11,7 @@ interface WatchlistState {
   addAlert: (propertyId: string, alert: Omit<WatchlistAlert, 'id'>) => void;
   markAlertAsRead: (propertyId: string, alertId: string) => void;
   clearAllAlerts: (propertyId: string) => void;
+  clearAllWatchlistAlerts: () => void; // New function to clear all alerts across all properties
 }
 
 export const useWatchlistStore = create<WatchlistState>()(
@@ -109,6 +110,18 @@ export const useWatchlistStore = create<WatchlistState>()(
             }
             return item;
           }),
+        });
+      },
+
+      clearAllWatchlistAlerts: () => {
+        const { watchlist } = get();
+        
+        // Update all properties to have empty alerts arrays
+        set({
+          watchlist: watchlist.map((item) => ({
+            ...item,
+            alerts: []
+          })),
         });
       },
     }),

@@ -1,37 +1,72 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
-# dependencies
+# Expo & React Native
 node_modules/
-
-# Expo
 .expo/
 dist/
-web-build/
-expo-env.d.ts
-
-# Native
-*.orig.*
+npm-debug.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
-
-# Metro
-.metro-health-check*
-
-# debug
-npm-debug.*
-yarn-debug.*
-yarn-error.*
+*.orig.*
+web-build/
 
 # macOS
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
-
-# typescript
+# TypeScript
 *.tsbuildinfo
+
+# Environment variables
 .env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Expo
+.expo-shared/
+
+# Android/IntelliJ
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+
+# iOS
+ios/Pods/
+ios/build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+
+# VSCode
+.vscode/
+
+# Testing
+coverage/
+
+# Production build files
+*.aab
+*.apk
+
+# EAS
+eas-build-pre-install-script.sh

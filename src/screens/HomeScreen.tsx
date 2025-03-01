@@ -44,7 +44,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             elevation: 4
           }}>
           <StyledText className="text-2xl font-bold text-primary-400">PropRadar</StyledText>
-          <StyledText className="text-sm text-gray-400 -mt-1">Find undervalued properties in Singapore</StyledText>
+          <StyledText className="text-sm text-gray-300 -mt-1">Find undervalued properties in Singapore</StyledText>
         </StyledView>
         
         <FilterBar />

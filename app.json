@@ -7,22 +7,54 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow PropRadar to use your location."
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.propradar.app",
+      "buildNumber": "1",
+      "config": {
+        "googleMapsApiKey": "${process.env.GOOGLE_MAPS_IOS_API_KEY}"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "PropRadar uses your location to show properties near you.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.propradar.app",
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "${process.env.GOOGLE_MAPS_ANDROID_API_KEY}"
+        }
+      },
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "your-project-id-here"
+      },
+      "apiBaseUrl": "${process.env.API_BASE_URL}",
+      "environment": "${process.env.ENVIRONMENT}"
     }
   }
 }

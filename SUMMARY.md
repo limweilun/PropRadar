@@ -1,8 +1,8 @@
-# SmartProperty Finder SG - Technical Summary
+# PropRadar - Technical Summary
 
 ## Project Overview
 
-SmartProperty Finder SG is a React Native mobile application designed to help Singaporeans identify undervalued property opportunities in the real estate market. The app provides a map-centric approach to property exploration, showing color-coded markers based on property valuation relative to market prices.
+PropRadar is a React Native mobile application designed to help Singaporeans identify undervalued property opportunities in the real estate market. The app provides a map-centric approach to property exploration, showing color-coded markers based on property valuation relative to market prices.
 
 ## Key Components
 

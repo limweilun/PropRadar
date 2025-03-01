@@ -1,207 +1,191 @@
-# SmartProperty Finder SG
+# PropRadar - Singapore Property Finder
 
-A React Native mobile application designed to help Singaporeans find undervalued properties based on price trends and transaction data.
+PropRadar is a React Native mobile application designed to help Singaporeans find undervalued properties based on real HDB resale transaction data and market trends.
 
-## Features
+<img src="assets/icon.png" alt="PropRadar Logo" width="120"/>
 
-- **Interactive Map View**: View properties across Singapore with color-coded pins representing undervalued, fair value, and overvalued properties
+## 📱 Key Features
+
+- **Interactive Map**: View properties across Singapore with color-coded markers showing valuation status
 - **Smart Filtering**: Filter properties by type (HDB/Private) and price range
-- **Property Details**: Tap on property pins to view detailed information including price per square foot, size, type, and undervaluation score
-- **Watchlist**: Save properties to monitor their price changes and receive alerts
-- **Price Trends**: View 6-month price trends for each property
-- **Undervaluation Metrics**: Clear indication of how each property is valued compared to similar properties in the area
+- **Property Details**: Access comprehensive information including price history, valuation metrics, and location details
+- **Watchlist**: Save properties to monitor price changes and receive alerts
+- **Cross-Platform**: Works seamlessly on both iOS and Android devices
 
-## Installation
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js (v16+)
 - npm or yarn
-- Expo CLI
+- Expo CLI (`npm install -g expo-cli`)
 - iOS Simulator (for Mac users) or Android Emulator
-- Expo Go app on your physical device (optional for testing)
+- Expo Go app on your physical device (optional)
 
-### Setup
+### Installation
 
 1. Clone the repository
+
 ```bash
-git clone <repository-url>
-cd PropRadar
+git clone https://github.com/yourusername/PropRadar-mobile.git
+cd PropRadar-mobile
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables
+
 ```bash
-# Copy the example .env file
+# Copy the example environment file
 cp .env.example .env
 
-# Edit the .env file with your own API keys
+# Open .env and add your Google Maps API keys
 ```
 
-4. API Keys Required
-- **GOV_DATA_API_KEY**: Register at https://data.gov.sg/user/register
-- **URA_API_KEY**: Apply at https://www.ura.gov.sg/maps/api/
-- **GOOGLE_MAPS_API_KEY**: Get from https://console.cloud.google.com/
-- **ONEMAP_API_KEY**: Register at https://www.onemap.gov.sg/home/
+4. Start the development server
 
-5. Start the development server
 ```bash
 npm start
 ```
 
-6. Run on your device or simulator
-- Press `i` to open in iOS Simulator
-- Press `a` to open in Android Emulator
-- Scan the QR code with Expo Go app on your phone
+5. Run on your preferred platform
+   - Press `i` to open in iOS Simulator
+   - Press `a` to open in Android Emulator
+   - Scan the QR code with Expo Go app on your phone
 
-## Tech Stack
+## 📊 Data Sources
+
+PropRadar uses real property transaction data from:
+
+- **HDB Resale Transactions**: Public data from [data.gov.sg](https://data.gov.sg/dataset/resale-flat-prices)
+  - No API key required
+  - Our ETL pipeline automatically fetches, processes, and caches this data
+  - Includes ~6 months of historical transactions
+
+- **Undervaluation Algorithm**: Our proprietary algorithm compares property prices with similar units to identify potential deals
+  - Compares by location, property type, size, and floor level
+  - Calculates price per square foot deviation from median
+  - Generates undervaluation scores showing % above or below market value
+
+## 🔑 External Services
+
+The application requires the following:
+
+- **Google Maps API Keys**: 
+  - Required for the interactive map functionality
+  - Get from [Google Cloud Console](https://console.cloud.google.com/)
+  - Separate keys needed for iOS and Android
+
+- **Optional APIs**:
+  - **URA API**: For private property data (optional extension)
+  - **OneMap API**: For additional geocoding functionality (optional)
+
+## 🏗️ Project Structure
+
+```
+PropRadar-mobile/
+├── assets/                  # App icons and images
+├── config/                  # Configuration files
+├── etl/                     # Data processing scripts
+│   └── sample_etl.py        # ETL pipeline for HDB data
+├── src/
+│   ├── components/          # UI components
+│   │   ├── FilterBar.tsx    # Property filtering interface
+│   │   ├── MapViewComponent.tsx  # Map interface
+│   │   ├── PropertyCard.tsx     # Property summary cards
+│   │   ├── PropertyDetails.tsx  # Detailed property view
+│   │   └── WatchlistItem.tsx    # Watchlist item component
+│   ├── hooks/               # Custom React hooks
+│   ├── navigation/          # Navigation configuration
+│   ├── screens/             # Main app screens
+│   │   ├── HomeScreen.tsx   # Main map screen
+│   │   ├── InfoScreen.tsx   # Information screen
+│   │   └── WatchlistScreen.tsx  # Watchlist management
+│   ├── services/            # API and backend services
+│   ├── state/               # State management (Zustand)
+│   ├── types/               # TypeScript definitions
+│   └── utils/               # Helper functions
+├── .env                     # Environment variables (not in repo)
+├── .env.example             # Example environment variables
+├── app.json                 # Expo configuration
+└── eas.json                 # EAS Build configuration
+```
+
+## 📲 Deployment
+
+PropRadar uses Expo Application Services (EAS) for building and deployment. See [DEPLOY.md](DEPLOY.md) for detailed instructions on:
+
+- Setting up API keys
+- Building for production
+- Submitting to App Store and Google Play
+
+### Quick deployment commands
+
+```bash
+# Build a preview version
+eas build --profile preview --platform all
+
+# Build for production
+eas build --profile production --platform all
+
+# Submit to stores
+eas submit --platform all
+```
+
+## 🧪 Data Processing
+
+PropRadar includes a Python-based ETL pipeline for processing HDB resale data:
+
+1. **Extract**: Fetch public HDB resale transaction data
+2. **Transform**: Calculate undervaluation scores based on comparable properties
+3. **Load**: Prepare data for the mobile app to consume
+
+To run the ETL pipeline:
+
+```bash
+# Navigate to the ETL directory
+cd etl
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run the ETL script
+python sample_etl.py
+```
+
+The script will:
+- Fetch HDB resale data for the past 6 months
+- Process and normalize the data
+- Calculate undervaluation scores
+- Save the processed data and statistics
+
+## 🛠️ Tech Stack
 
 - **Framework**: React Native with Expo
-- **UI Libraries**: NativeWind (Tailwind CSS for React Native)
-- **Maps**: React Native Maps with Google Maps
+- **UI/UX**: NativeWind (Tailwind CSS for React Native)
+- **Maps**: React Native Maps (Apple Maps on iOS, Google Maps on Android)
 - **State Management**: Zustand
-- **Storage**: AsyncStorage for local data persistence
+- **Data Storage**: AsyncStorage for local persistence
 - **Navigation**: React Navigation (Stack & Tab)
+- **Data Processing**: Python with Pandas for ETL
 
-## Environment Variables
+## 🔮 Roadmap
 
-This application uses the following environment variables that must be configured in the `.env` file:
+- User authentication and profile management
+- Private property data integration
+- Price prediction using machine learning
+- Push notifications for price alerts
+- Social sharing of property finds
+- Integration with property listings websites
 
-```
-# Singapore Government Data API key (data.gov.sg)
-GOV_DATA_API_KEY=your_key_here
+## 📄 License
 
-# URA Property API key
-URA_API_KEY=your_key_here
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-# Google Maps API key for property mapping
-GOOGLE_MAPS_API_KEY=your_key_here
-
-# OneMap API key for Singapore-specific mapping
-ONEMAP_API_KEY=your_key_here
-
-# API request limits and timeouts
-API_REQUEST_TIMEOUT_MS=5000
-API_MAX_RETRIES=3
-```
-
-## Data Pipeline
-
-### HDB Resale Data ETL Process
-
-The application's backend includes a Python-based ETL pipeline that:
-
-1. **Extracts** data from public APIs:
-   - HDB resale transactions from data.gov.sg
-   - URA private property transactions (when access is secured)
-
-2. **Transforms** the data by:
-   - Normalizing property types and sizes
-   - Calculating price per square foot
-   - Computing undervaluation scores by comparing with median prices of similar properties
-
-3. **Loads** processed data into:
-   - Supabase PostgreSQL database for structured storage
-   - Precomputes scores to minimize frontend computation
-
-### Sample ETL Code
-
-```python
-# sample_etl.py
-import pandas as pd
-import requests
-from datetime import datetime, timedelta
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-GOV_API_KEY = os.getenv('GOV_DATA_API_KEY')
-
-def fetch_hdb_data():
-    """Fetch HDB resale data from data.gov.sg API"""
-    # Get data for the last 6 months
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=180)
-    
-    headers = {
-        'api-key': GOV_API_KEY
-    }
-    
-    url = f"https://data.gov.sg/api/action/datastore_search?resource_id=f1765b54-a209-4718-8d38-a39237f502b3&q=&filters=%7B%22month%22%3A%7B%22%24gte%22%3A%22{start_date.strftime('%Y-%m')}%22%2C%22%24lte%22%3A%22{end_date.strftime('%Y-%m')}%22%7D%7D"
-    
-    response = requests.get(url, headers=headers)
-    data = response.json()
-    
-    return pd.DataFrame(data['result']['records'])
-
-def process_hdb_data(df):
-    """Process and normalize HDB data"""
-    # Clean and transform data
-    df['floor_area_sqm'] = pd.to_numeric(df['floor_area_sqm'])
-    df['resale_price'] = pd.to_numeric(df['resale_price'])
-    
-    # Convert to square feet
-    df['floor_area_sqft'] = df['floor_area_sqm'] * 10.764
-    
-    # Calculate price per square foot
-    df['price_per_sqft'] = df['resale_price'] / df['floor_area_sqft']
-    
-    # Extract room type from flat_type
-    df['room_type'] = df['flat_type']
-    
-    # Format address with unit number (extracted from address and storey_range)
-    df['formatted_address'] = df.apply(lambda x: f"Block {x['block']}, #{x['storey_range'].split(' ')[0]}-{x['flat_model'][:3]}, {x['street_name']}", axis=1)
-    
-    return df
-
-def calculate_undervaluation(df):
-    """Calculate undervaluation scores for properties"""
-    # Group by town and flat_type to get median price per sqft
-    median_prices = df.groupby(['town', 'flat_type'])['price_per_sqft'].median().reset_index()
-    median_prices.rename(columns={'price_per_sqft': 'median_price_per_sqft'}, inplace=True)
-    
-    # Merge with original data
-    df = pd.merge(df, median_prices, on=['town', 'flat_type'], how='left')
-    
-    # Calculate undervaluation score (% below/above median)
-    df['undervaluation_score'] = ((df['median_price_per_sqft'] - df['price_per_sqft']) / df['median_price_per_sqft']) * 100
-    
-    return df
-
-def main():
-    # Extract
-    raw_data = fetch_hdb_data()
-    
-    # Transform
-    processed_data = process_hdb_data(raw_data)
-    final_data = calculate_undervaluation(processed_data)
-    
-    # Load (would connect to Supabase in production)
-    final_data.to_csv('processed_hdb_data.csv', index=False)
-    print(f"Processed {len(final_data)} HDB transactions")
-
-if __name__ == "__main__":
-    main()
-```
-
-## Future Enhancements
-
-- **User Authentication**: Add user accounts for personalized experiences
-- **Private Property Data**: Integrate URA API for private condo transaction data
-- **Push Notifications**: Real-time alerts for price changes in watchlisted properties
-- **Market Analysis**: Advanced analytics on property market trends
-- **Integration with Property Portals**: Connect with PropertyGuru or 99.co APIs (subject to partnerships)
-- **Property History**: View detailed transaction history for each property
-
-## License
-
-This project is licensed under the MIT License.
-
-## Disclaimer
+## ⚠️ Disclaimer
 
 This application is for informational purposes only and should not be considered financial advice. Always conduct your own due diligence and consult with real estate professionals before making property investment decisions.
